@@ -1,6 +1,5 @@
-package Product.query.dto;
+package Dsa.entity;
 
-import Member.query.dto.MemberData;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +19,7 @@ public class ProductData {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private MemberData user_id;
+    private UserData user_id;
 
 
     @Column(nullable = false)

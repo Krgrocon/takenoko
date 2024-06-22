@@ -1,6 +1,6 @@
-package Member.query.dto;
+package Dsa.entity;
 
-import Product.query.dto.ProductData;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "user")
-public class MemberData {
+public class UserData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,6 @@ public class MemberData {
     @Column(name = "update_at")
     private LocalDateTime updDate;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<ProductData> products = new ArrayList<>();
-};
+}

@@ -1,7 +1,9 @@
-package Dsa.tekenoko;
+package Dsa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
 
 @SpringBootApplication
 public class TekenokoApplication {
