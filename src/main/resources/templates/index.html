@@ -76,9 +76,25 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-bottom: 10px; /* Added this to create space between the buttons */
         }
         .login-form button:hover {
             background-color: #0077ED;
+        }
+        .signup-button {
+            width: 100%;
+            padding: 15px;
+            background: #f5f5f7;
+            color: #0071e3;
+            border: 1px solid #0071e3;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .signup-button:hover {
+            background-color: #0071e3;
+            color: white;
         }
         .banner {
             flex: 2;
@@ -141,6 +157,7 @@
             <input type="email" placeholder="이메일">
             <input type="password" placeholder="비밀번호">
             <button>로그인</button>
+            <button class="signup-button" onclick="location.href='/login/new'" >회원가입</button> <!-- Sign Up button added here -->
         </div>
 
         <div class="banner">

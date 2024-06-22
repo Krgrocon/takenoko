@@ -2,6 +2,7 @@ package Dsa.repository;
 
 import Dsa.entity.UserData;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,13 +10,13 @@ import java.util.List;
 @Repository
 public class JpaUserRepository implements UserRepository {
 
-        private final EntityManager em;
+    @PersistenceContext
+    private EntityManager em; // 필드에 @PersistenceContext 적용
 
-        public JpaUserRepository(EntityManager em) {
-            this.em = em;
-        }
+    // 생성자는 비워둡니다.
+    public JpaUserRepository() {}
 
-
+    // ... (기존 코드) ...
 
     // UserData엔티티에 데이터를 저장하는 메소드
     @Override
@@ -38,5 +39,3 @@ public class JpaUserRepository implements UserRepository {
         return result;
     }
 }
-
-

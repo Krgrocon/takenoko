@@ -3,6 +3,7 @@ package Dsa.service;
 
 import Dsa.entity.UserData;
 import Dsa.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 
 @Service
+@Transactional
 public class UserService {
 
         private final UserRepository userRepository;
@@ -21,9 +23,11 @@ public class UserService {
             this.userRepository = userRepository;
         }
 
-        public void join(UserData userdata){
-            userRepository.save(userdata);
-        }
+    public UserData save(UserData userdata) {
+        //validateDuplicateUser(userdata);
+        System.out.println("확인용");
+        return userRepository.save(userdata);
+    }
 
 
 
