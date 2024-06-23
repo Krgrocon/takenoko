@@ -3,11 +3,13 @@ package Dsa.controller;
 
 import Dsa.entity.UserData;
 import Dsa.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -20,9 +22,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login/new")
-    public String CreateForm() {
-        return "/login";
+    @GetMapping("/create")
+    public String createForm() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String password, Model model , HttpSession session){
+
+        UserData user = userService.authenticate(email,password);
+//        if(user == null){
+//            model.addAttribute("errorMessage", "아이디 또는 비밀번호가 틀렸습니다.");
+//            return "redirect:/";
+//        } 아직 예외처리안함
+        session.setAttribute("loggedInUser", user);
+        return "redirect:/";
     }
 
 

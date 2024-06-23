@@ -29,6 +29,10 @@ public class UserService {
         return userRepository.save(userdata);
     }
 
+    public UserData authenticate(String email, String password) {
+        Optional<UserData> userdata = Optional.ofNullable(userRepository.findByEmailAndPassword(email, password));
+        return userdata.orElse(null);
+    }
 
 
 }

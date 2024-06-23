@@ -35,7 +35,10 @@ public class JpaUserRepository implements UserRepository {
     // 아이디 비번 검사
     @Override
     public UserData findByEmailAndPassword(String email, String password) {
-        UserData result = em.createQuery("select u from UserData u where u.email = :username and u.password = :password", UserData.class).getSingleResult();
+        UserData result = em.createQuery("select u from UserData u where u.email = :email and u.password = :password", UserData.class)
+                .setParameter("email", email)  // email 매개변수 설정
+                .setParameter("password", password) // password 매개변수 설정
+                .getSingleResult();
         return result;
     }
 }

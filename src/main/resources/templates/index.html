@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -152,12 +152,22 @@
 
 <div class="container">
     <div class="main-content">
-        <div class="login-form">
+        <div class="login-form" th:if="${session.loggedInUser == null}">
             <h3>로그인</h3>
-            <input type="email" placeholder="이메일">
-            <input type="password" placeholder="비밀번호">
-            <button>로그인</button>
-            <button class="signup-button" onclick="location.href='/login/new'" >회원가입</button> <!-- Sign Up button added here -->
+            <form action="/login" method="POST">
+                <input type="email" name="email" placeholder="이메일" required>
+                <input type="password" name="password" placeholder="비밀번호" required>
+                <button type="submit">로그인</button>
+                <button type="button" class="signup-button" onclick="location.href='/create'">회원가입</button>
+            </form>
+        </div>
+
+        <div class="login-form" th:if="${session.loggedInUser != null}">
+            <h3>환영합니다</h3>
+            <h1><span th:text="${session.loggedInUser.nickname}">User</span>님!</h1>
+            <form action="/logout" method="POST">
+                <button type="submit">로그아웃</button>
+            </form>
         </div>
 
         <div class="banner">
