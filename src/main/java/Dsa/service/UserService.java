@@ -24,10 +24,23 @@ public class UserService {
         }
 
     public UserData save(UserData userdata) {
-        //validateDuplicateUser(userdata);
-        System.out.println("확인용");
+
         return userRepository.save(userdata);
     }
+
+
+
+    public boolean usernameVerification(String username){
+        boolean isUsername = true;
+        UserData userdata = userRepository.findByEmail(username);
+        System.out.println(userdata);
+        if(userdata == null){
+            isUsername = false;
+        }
+        return isUsername;
+    }
+
+
 
     public UserData authenticate(String email, String password) {
         Optional<UserData> userdata = Optional.ofNullable(userRepository.findByEmailAndPassword(email, password));

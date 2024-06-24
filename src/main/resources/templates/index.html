@@ -166,7 +166,7 @@
             <h3>환영합니다</h3>
             <h1><span th:text="${session.loggedInUser.nickname}">User</span>님!</h1>
             <form action="/logout" method="POST">
-                <button type="submit">로그아웃</button>
+                <button type="submit"   `>로그아웃</button>
             </form>
         </div>
 
@@ -220,6 +220,7 @@
         currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
         bannerImg.src = bannerImages[currentImageIndex];
     }
+
 
     setInterval(changeBanner, 3000);
 </script>

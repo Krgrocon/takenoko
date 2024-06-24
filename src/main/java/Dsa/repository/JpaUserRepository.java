@@ -27,11 +27,20 @@ public class JpaUserRepository implements UserRepository {
 
     // 추후 아이디 찾는 용
     @Override
-    public UserData findByEmail(String username) {
-        UserData result = em.createQuery("select u from UserData u where u.email = :username", UserData.class).getSingleResult();
-        return result;
-    }
+    public UserData findByEmail(String email) {
+        List<UserData> results = em.createQuery("select u from UserData u where u.email = :email", UserData.class)
+                .setParameter("email", email)  // email 매개변수 설정
+                .getResultList();
 
+        if (!results.isEmpty()) {
+            // 결과가 있으면 첫 번째 항목을 반환
+            System.out.println(results.get(0).getEmail());
+            return results.get(0);
+        } else {
+            // 결과가 없으면 null을 반환
+            return null;
+        }
+    }
     // 아이디 비번 검사
     @Override
     public UserData findByEmailAndPassword(String email, String password) {

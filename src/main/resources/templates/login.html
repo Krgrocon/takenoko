@@ -61,5 +61,55 @@
         <button type="submit">등록</button>
     </form>
 </div>
+
+<script th:inline="javascript" >
+    function isPasswordValid(password) {
+        var regex = /^(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z!@_]{8,}$/;
+        return regex.test(password);
+    }
+
+    var passwordInput = document.querySelector('input[name="password"]');
+    var form = document.querySelector('form');
+
+    form.addEventListener('submit', function(event) {
+        if (!isPasswordValid(passwordInput.value)) {
+            event.preventDefault();
+            alert('비밀번호는 숫자와 문자를 반드시 포함해야 합니다!');
+        }
+    });
+
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(form);
+
+        var formObject = {};
+        formData.forEach(function(value, key){
+            formObject[key] = value;
+        });
+
+        console.log(formObject);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/users/new', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (this.status == 200) {
+                var response = JSON.parse(this.responseText);
+                if (response.success) {
+                    alert('회원가입이 완료되었습니다.');
+                    window.location.href = '/';
+                } else {
+                    alert(response.errorMessage);
+                }
+            } else {
+                alert('요청이 실패하였습니다.');
+            }
+        };
+
+        xhr.send(JSON.stringify(formObject));
+    });
+
+</script>
 </body>
 </html>
